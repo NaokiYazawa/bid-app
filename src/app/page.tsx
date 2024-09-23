@@ -1,8 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { SignIn } from "@/components/sign-in";
 import { database } from "@/db/database";
-import { bids as bidsSchema } from "@/db/schema";
-import { revalidatePath } from "next/cache";
 
 export default async function HomePage() {
   const bids = await database.query.bids.findMany();
@@ -10,8 +7,8 @@ export default async function HomePage() {
   return (
     <main className="space-y-8">
       <h1 className="text-4xl font-bold">Items For Sale</h1>
-
-      <form
+      <SignIn />
+      {/* <form
         action={async () => {
           "use server";
           await database.insert(bidsSchema).values({});
@@ -20,7 +17,7 @@ export default async function HomePage() {
       >
         <Input name="bid" placeholder="Bid" />
         <Button type="submit">Place Bid</Button>
-      </form>
+      </form> */}
 
       {bids.map((bid) => (
         <div key={bid.id}>{bid.id}</div>
